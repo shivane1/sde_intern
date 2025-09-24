@@ -1,0 +1,24 @@
+#include<bits\stdc++.h>
+using namespace std;
+
+int main() {
+    srand(time(0));
+    int number = rand() % 100 + 1; // Random number 1-100
+    int guess;
+
+    cout << "🎮 Guess the Number Game (1-100) 🎮\n";
+    while (true) {
+        cout << "Enter your guess: ";
+        cin >> guess;
+
+        if (guess == number) {
+            cout << "🎉 Correct! You win!\n";
+            break;
+        } else if (guess < number) {
+            cout << "Too low, try again!\n";
+        } else {
+            cout << "Too high, try again!\n";
+        }
+    }
+    return 0;
+}
