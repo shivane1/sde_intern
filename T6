@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <fstream>
+#include <regex>
+using namespace std;
+
+int main() {
+    string url;
+    cout << "Enter website URL: ";
+    cin >> url;
+
+    cout << "\nFetching data from " << url << "...\n";
+
+    // Save webpage into a file
+    string command = "curl -s " + url + " > page.html";
+    system(command.c_str());
+
+    // Read the saved HTML file
+    ifstream file("page.html");
+    if (!file) {
+        cerr << "Error: Could not fetch data.\n";
+        return 1;
+    }
+
+    string html((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
+    file.close();
+
+    // Extract <title>
+    regex titleRegex("<title>(.*?)</title>");
+    smatch titleMatch;
+    if (regex_search(html, titleMatch, titleRegex)) {
+        cout << "\nPage Title: " << titleMatch[1] << "\n";
+    } else {
+        cout << "\nNo <title> found in the page.\n";
+    }
+
+    // Extract links
+    regex linkRegex("<a[^>]+href=[\"']?([^\"'>]+)[\"']?");
+    smatch linkMatch;
+
+    cout << "\nLinks found on the page:\n";
+    int count = 0;
+    string::const_iterator searchStart(html.cbegin());
+    while (regex_search(searchStart, html.cend(), linkMatch, linkRegex)) {
+        cout << " - " << linkMatch[1] << "\n";
+        searchStart = linkMatch.suffix().first;
+        count++;
+    }
+
+    if (count == 0) {
+        cout << "No links found.\n";
+    }
+
+    return 0;
+}
