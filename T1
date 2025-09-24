@@ -1,18 +1,20 @@
-#include<bits\stdc++.h>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-int main() {
+// 1. Guess the Number Game
+void guessNumberGame() {
     srand(time(0));
-    int number = rand() % 100 + 1; // Random number 1-100
+    int number = rand() % 100 + 1;
     int guess;
 
-    cout << "🎮 Guess the Number Game (1-100) 🎮\n";
+    cout << "\n--- Guess the Number (1–100) ---\n";
     while (true) {
         cout << "Enter your guess: ";
         cin >> guess;
-
         if (guess == number) {
-            cout << "🎉 Correct! You win!\n";
+            cout << "Correct! You win!\n";
             break;
         } else if (guess < number) {
             cout << "Too low, try again!\n";
@@ -20,5 +22,79 @@ int main() {
             cout << "Too high, try again!\n";
         }
     }
-    return 0;
+}
+
+// 2. Rock Paper Scissors
+void rockPaperScissors() {
+    srand(time(0));
+    string choices[3] = {"Rock", "Paper", "Scissors"};
+    int user, comp;
+
+    cout << "\n--- Rock Paper Scissors ---\n";
+    cout << "0 = Rock, 1 = Paper, 2 = Scissors\n";
+    cout << "Enter your choice: ";
+    cin >> user;
+
+    comp = rand() % 3;
+    cout << "Computer chose: " << choices[comp] << "\n";
+
+    if (user == comp) cout << "It's a Draw!\n";
+    else if ((user == 0 && comp == 2) || (user == 1 && comp == 0) || (user == 2 && comp == 1))
+        cout << "You Win!\n";
+    else
+        cout << "Computer Wins!\n";
+}
+
+// 3. Dice Roll Game
+void diceRoll() {
+    srand(time(0));
+    cout << "\n--- Dice Roll ---\n";
+    cout << "You rolled: " << (rand() % 6 + 1) << "\n";
+}
+
+// 4. Coin Toss
+void coinToss() {
+    srand(time(0));
+    cout << "\n--- Coin Toss ---\n";
+    int toss = rand() % 2;
+    if (toss == 0) cout << "Heads!\n";
+    else cout << "Tails!\n";
+}
+
+// 5. Multiplication Quiz
+void multiplicationQuiz() {
+    srand(time(0));
+    cout << "\n--- Multiplication Quiz ---\n";
+    int a = rand() % 10 + 1;
+    int b = rand() % 10 + 1;
+    int ans;
+    cout << "What is " << a << " x " << b << "? ";
+    cin >> ans;
+    if (ans == a * b) cout << "Correct!\n";
+    else cout << "Wrong! The answer was " << a * b << "\n";
+}
+
+int main() {
+    int choice;
+    while (true) {
+        cout << "\n====== Mini Game Hub ======\n";
+        cout << "1. Guess the Number\n";
+        cout << "2. Rock Paper Scissors\n";
+        cout << "3. Dice Roll\n";
+        cout << "4. Coin Toss\n";
+        cout << "5. Multiplication Quiz\n";
+        cout << "6. Exit\n";
+        cout << "Choose a game: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: guessNumberGame(); break;
+            case 2: rockPaperScissors(); break;
+            case 3: diceRoll(); break;
+            case 4: coinToss(); break;
+            case 5: multiplicationQuiz(); break;
+            case 6: cout << "Exiting... Goodbye\n"; return 0;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+    }
 }
