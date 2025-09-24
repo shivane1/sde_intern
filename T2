@@ -1,0 +1,165 @@
+#include <iostream>
+using namespace std;
+
+// 1. Increasing Triangle
+void pattern1(int n) {
+    cout << "\nPattern 1: Increasing Triangle\n";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) cout << j << " ";
+        cout << "\n";
+    }
+}
+
+// 2. Inverted Triangle
+void pattern2(int n) {
+    cout << "\nPattern 2: Inverted Triangle\n";
+    for (int i = n; i >= 1; i--) {
+        for (int j = 1; j <= i; j++) cout << j << " ";
+        cout << "\n";
+    }
+}
+
+// 3. Number Pyramid
+void pattern3(int n) {
+    cout << "\nPattern 3: Number Pyramid\n";
+    for (int i = 1; i <= n; i++) {
+        for (int s = 1; s <= n - i; s++) cout << "  ";
+        for (int j = 1; j <= i; j++) cout << j << " ";
+        for (int j = i - 1; j >= 1; j--) cout << j << " ";
+        cout << "\n";
+    }
+}
+
+// 4. Diamond (Stars)
+void pattern4(int n) {
+    cout << "\nPattern 4: Diamond Pattern (Stars)\n";
+    for (int i = 1; i <= n; i++) {
+        for (int s = 1; s <= n - i; s++) cout << " ";
+        for (int j = 1; j <= 2 * i - 1; j++) cout << "*";
+        cout << "\n";
+    }
+    for (int i = n - 1; i >= 1; i--) {
+        for (int s = 1; s <= n - i; s++) cout << " ";
+        for (int j = 1; j <= 2 * i - 1; j++) cout << "*";
+        cout << "\n";
+    }
+}
+
+// 5. Floyd's Triangle
+void pattern5(int n) {
+    cout << "\nPattern 5: Floyd's Triangle\n";
+    int num = 1;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) cout << num++ << " ";
+        cout << "\n";
+    }
+}
+
+// 6. Pascal’s Triangle
+void pattern6(int n) {
+    cout << "\nPattern 6: Pascal's Triangle\n";
+    for (int i = 0; i < n; i++) {
+        for (int s = 0; s < n - i - 1; s++) cout << "  ";
+        int val = 1;
+        for (int j = 0; j <= i; j++) {
+            cout << val << "   ";
+            val = val * (i - j) / (j + 1);
+        }
+        cout << "\n";
+    }
+}
+
+// 7. Hollow Square
+void pattern7(int n) {
+    cout << "\nPattern 7: Hollow Square\n";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (i == 1 || i == n || j == 1 || j == n)
+                cout << "* ";
+            else
+                cout << "  ";
+        }
+        cout << "\n";
+    }
+}
+
+// 8. Right-Aligned Triangle
+void pattern8(int n) {
+    cout << "\nPattern 8: Right-Aligned Triangle\n";
+    for (int i = 1; i <= n; i++) {
+        for (int s = 1; s <= n - i; s++) cout << "  ";
+        for (int j = 1; j <= i; j++) cout << j << " ";
+        cout << "\n";
+    }
+}
+
+// 9. Hollow Pyramid
+void pattern9(int n) {
+    cout << "\nPattern 9: Hollow Pyramid\n";
+    for (int i = 1; i <= n; i++) {
+        for (int s = 1; s <= n - i; s++) cout << " ";
+        for (int j = 1; j <= 2 * i - 1; j++) {
+            if (j == 1 || j == 2 * i - 1 || i == n)
+                cout << "*";
+            else
+                cout << " ";
+        }
+        cout << "\n";
+    }
+}
+
+// 10. Binary Triangle
+void pattern10(int n) {
+    cout << "\nPattern 10: Binary Triangle\n";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++)
+            cout << ((i + j) % 2) << " ";
+        cout << "\n";
+    }
+}
+
+int main() {
+    int choice, n;
+    cout << "✨ Number Pattern Generator ✨\n";
+    cout << "--------------------------------\n";
+
+    while (true) {
+        cout << "\nChoose a pattern to print:\n";
+        cout << "1. Increasing Triangle\n";
+        cout << "2. Inverted Triangle\n";
+        cout << "3. Number Pyramid\n";
+        cout << "4. Diamond Pattern (Stars)\n";
+        cout << "5. Floyd's Triangle\n";
+        cout << "6. Pascal's Triangle\n";
+        cout << "7. Hollow Square\n";
+        cout << "8. Right-Aligned Triangle\n";
+        cout << "9. Hollow Pyramid\n";
+        cout << "10. Binary Triangle\n";
+        cout << "11. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 11) {
+            cout << "Exiting... Goodbye 👋\n";
+            break;
+        }
+
+        cout << "Enter number of rows: ";
+        cin >> n;
+
+        switch (choice) {
+            case 1: pattern1(n); break;
+            case 2: pattern2(n); break;
+            case 3: pattern3(n); break;
+            case 4: pattern4(n); break;
+            case 5: pattern5(n); break;
+            case 6: pattern6(n); break;
+            case 7: pattern7(n); break;
+            case 8: pattern8(n); break;
+            case 9: pattern9(n); break;
+            case 10: pattern10(n); break;
+            default: cout << "⚠️ Invalid choice! Try again.\n";
+        }
+    }
+    return 0;
+}
